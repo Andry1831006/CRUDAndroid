@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyCRUD</string>
+    <string name="btnDetail">Back?</string>
+    <string name="txtDetail">Ini adalah Activity Detail</string>
 </resources>

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CRUDAndroid.iml" filepath="$PROJECT_DIR$/.idea/modules/CRUDAndroid.iml" group="CRUDAndroid" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CRUDAndroid-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CRUDAndroid-app.iml" group="CRUDAndroid/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyCRUD.iml" filepath="$PROJECT_DIR$/.idea/modules/MyCRUD.iml" group="MyCRUD" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="MyCRUD/app" />
     </modules>

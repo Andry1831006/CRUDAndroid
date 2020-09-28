@@ -48,4 +48,10 @@
         android:text="Daftar Pegawai"
         android:id="@+id/buttonView" />
 
+    <Button
+        android:id="@+id/buttonDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detail Activity" />
+
 </LinearLayout>
