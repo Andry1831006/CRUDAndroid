@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Spinner spinnerPosisi;
     ArrayList<String> posisiList = new ArrayList<>();
+    ArrayList<String> gajihList = new ArrayList<>();
     ArrayAdapter<String> posisiAdapter;
     RequestQueue requestQueue;
 
@@ -58,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Inisialisasi dari View
         editTextName = (EditText) findViewById(R.id.editTextName);
-        editTextDesg = (EditText) findViewById(R.id.editTextDesg);
+//        editTextDesg = (EditText) findViewById(R.id.editTextDesg);
+
         editTextSal = (EditText) findViewById(R.id.editTextSalary);
 
         buttonAdd = (Button) findViewById(R.id.buttonAdd);
@@ -69,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonAdd.setOnClickListener(this);
         buttonView.setOnClickListener(this);
         buttonDetail.setOnClickListener(this);
+
+
 
 //      Mulai dari sini Spinnernya
         requestQueue = Volley.newRequestQueue(this);
@@ -85,12 +91,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             JSONArray jsonArray = response.getJSONArray("result");
                             for (int i = 0; 0 < jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String namaPosisi = jsonObject.optString("posisi");
+                                String namaPosisi = jsonObject.getString("posisi");
+                                String gajih = jsonObject.getString("gajih");
                                 posisiList.add(namaPosisi);
+                                gajihList.add(gajih);
                                 posisiAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item, posisiList);
                                 posisiAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 spinnerPosisi.setAdapter(posisiAdapter);
                             }
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -104,6 +114,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
         );
         requestQueue.add(jsonObjectRequest);
+
+
+        spinnerPosisi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                editTextSal.setText(gajihList.get(position));
+            } // to close the onItemSelected
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+
+            }
+        });
+
     }
 
 
@@ -111,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void addEmployee(){
 
         final String name = editTextName.getText().toString().trim();
-        final String desg = editTextDesg.getText().toString().trim();
+        final String desg = spinnerPosisi.getSelectedItem().toString();
         final String sal = editTextSal.getText().toString().trim();
 
         class AddEmployee extends AsyncTask<Void,Void,String>{
